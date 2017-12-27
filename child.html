@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>Child</title>
+</head>
+<body>
+    <div id="messages_container">
+        <h3>Send message to parent</h3>
+        <textarea id="message"></textarea>
+        <button id="send_message">Send message</button>
+    </div>
+    <div id="external_messages_container">
+        <h3>Messages from parent</h3>
+        <div id="external_messages"></div>
+    </div>
+    <script>
+
+    function SendMessageToParent() {
+        window.opener.ProcessChildMessage($("#message").val());
+        $("#message").val('');
+    }
+
+    function ProcessParentMessage(message) {
+        $('#external_messages').append('<div>' + message + '<div>');
+    }
+
+    document.getElementById("send_message").addEventListener("click", SendMessageToParent);
+
+
+    </script>
+</body>
+</html>

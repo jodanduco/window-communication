@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>Parent</title>
+</head>
+<body>
+    <button id="open_child">
+        Open child window
+    </button>
+    
+    <div id="messages_container">
+        <h3>Send message to child</h3>
+        <textarea id="message"></textarea>
+        <button id="send_message">Send message</button>
+    </div>
+    <div id="external_messages_container">
+        <h3>Messages from children</h3>
+        <div id=external_messages ""></div>
+    </div>
+    <script>
+        var _CHILD_WINDOW_HANDLE = null;
+
+            function OpenChild() {
+                const url = 'https://codepen.io/jodanduco/pen/Qadmbp';
+                _CHILD_WINDOW_HANDLE = window.open(url);
+            }
+
+            function SendMessageToChild() {
+                const message = $('#message').val();
+                console.log('message', message);
+                _CHILD_WINDOW_HANDLE.ProcessParentMessage(message);
+                $('#message').val('');
+            }
+
+            function ProcessChildMessage(message) {
+                $('#external_messages').append('<div>' + message + '</div>')
+            }
+
+
+            document.getElementById("open_child").addEventListener("click", OpenChild);
+            document.getElementById("send_message").addEventListener("click", SendMessageToChild);
+    </script>
+    
+</body>
+</html>
